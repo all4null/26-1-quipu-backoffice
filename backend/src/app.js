@@ -24,6 +24,7 @@ const loginRouter = require("../src/routes/login");
 const memberRouter = require("../src/routes/member");
 const seminaRouter = require("../src/routes/semina");
 const featureRouter = require("../src/routes/feature");
+const activityRouter = require("../src/routes/activity");
 
 const isProdOrTest = NODE_ENV === "production" || NODE_ENV === "test";
 const PORT_NUMBER = Number(PORT) || 3001;
@@ -127,6 +128,7 @@ app.use("/bo/semina", seminaRouter);
 app.use("/bo/feature", featureRouter);
 // 하위호환: 구버전 프론트가 /feature/* 를 호출하는 경우 지원
 app.use("/feature", featureRouter);
+app.use("/bo", activityRouter); // activityRouter 추가
 
 if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
